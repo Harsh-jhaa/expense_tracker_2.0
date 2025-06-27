@@ -1,6 +1,6 @@
 import express from 'express';
 // import Expense from "../models/Expense";
-import protect from '../middlewares/authMiddleware';
+import protect from '../middlewares/authMiddleware.js';
 import getDashboardData from '../controllers/dashboardController.js';
 
 const router = express.Router();

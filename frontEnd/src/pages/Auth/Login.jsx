@@ -29,7 +29,12 @@ const Login = () => {
     }
 
     setError(null);
+    
+
+
   };
+
+
   return (
     <AuthLayout>
       <div className='loginComp  lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center'>
