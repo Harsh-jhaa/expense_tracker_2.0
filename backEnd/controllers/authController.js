@@ -11,7 +11,7 @@ const generateToken = (id) => {
 const registerUser = async (req, res) => {
   let { fullname, email, password, profileImageUrl } = req.body;
   // check if all fields are filled
-  if (!fullname || !email || !password || !profileImageUrl) {
+  if (!fullname || !email || !password) {
     return res.status(400).json({ message: 'Please fill all fields' });
   }
   // Check if user already exists
@@ -33,6 +33,7 @@ const registerUser = async (req, res) => {
       user,
       token: generateToken(user._id),
     });
+    // res.send('register body', req.body);
   } catch (error) {
     return res
       .status(500)

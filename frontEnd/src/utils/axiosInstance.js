@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../apiPaths.js';
+import { BASE_URL } from './apiPaths.js';
 
 // Create an Axios instance with default settings
 // This instance can be used throughout the application to make API requests

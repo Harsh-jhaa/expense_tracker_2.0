@@ -7,9 +7,11 @@ import Income from './pages/Dashboard/Income.jsx';
 import Expense from './pages/Dashboard/Expense.jsx';
 import AuthLayout from './components/layouts/AuthLayout.jsx';
 import './index.css';
+import User from '../../backEnd/models/User.js';
+import { UserProvider } from './context/userContext.jsx';
 const App = () => {
   return (
-    <>
+    <UserProvider>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Root />} />
@@ -20,7 +22,7 @@ const App = () => {
           <Route path='/expense' element={<Expense />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </UserProvider>
   );
 };
 

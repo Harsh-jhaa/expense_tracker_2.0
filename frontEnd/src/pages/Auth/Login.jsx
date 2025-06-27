@@ -5,11 +5,17 @@ import { useState } from 'react';
 import Input from '../../components/Inputs/Input.jsx';
 import '../../index.css';
 import validEmail from '../../utils/helper.js';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { API_PATHS } from '../../utils/apiPaths.js';
+import { UserContext } from '../../context/userContext.jsx';
+// import { set } from 'mongoose';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  const {updateUser} = React.useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -28,12 +34,32 @@ const Login = () => {
       return;
     }
 
-    setError(null);
-    
+    setError('');
 
-
+    // Make API call to login
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
+      // taking out token and user from response
+      // and storing token in local storage
+      const { token, user } = response.data;
+      if (token) {
+        localStorage.setItem('token', token);
+        updateUser(user);
+        navigate('/dashboard');
+      }
+      // console.log('Login successful:', user);
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError('Something went wrong, please try again later');
+      }
+      // console.log('Login error:', error);
+    }
   };
-
 
   return (
     <AuthLayout>

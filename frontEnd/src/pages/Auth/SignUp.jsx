@@ -6,6 +6,12 @@ import Input from '../../components/Inputs/Input.jsx';
 import '../../index.css';
 import validEmail from '../../utils/helper.js';
 import ProfilePicSelector from '../../components/Inputs/ProfilePicSelector.jsx';
+import axios from 'axios';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { API_PATHS } from '../../utils/apiPaths.js';
+import { UserContext } from '../../context/userContext.jsx';
+import uploadImage from '../../utils/uploadImage.js';
+// import upload from '../../../../backEnd/middlewares/uploadMiddleware.js';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -14,10 +20,13 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   // const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
+
+  const { updateUser } = React.useContext(UserContext);
+
   const navigate = useNavigate();
   const handleSignUp = async (e) => {
-    let profileImageUrl = '';
     e.preventDefault();
+    let profileImageUrl = '';
     if (!email) {
       setError('Please enter the email address');
       return;
@@ -34,7 +43,37 @@ const SignUp = () => {
       setError('Please enter the password');
       return;
     }
-    setError(null);
+    setError('');
+
+    try {
+      // If a profile picture is selected, upload it to the server
+      if (profilePic) {
+        const imgUploadRes = await uploadImage(profilePic);
+        profileImageUrl = imgUploadRes.imageUrl || '';
+      }
+      // console.log({ fullName, email, password, profileImageUrl });
+
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        fullname: fullName,
+        email,
+        password,
+        profileImageUrl,
+      });
+
+      const { token, user } = response.data;
+      if (token) {
+        localStorage.setItem('token', token);
+        updateUser(user);
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError('Something went wrong, please try again later');
+      }
+      // console.error(error);
+    }
   };
   return (
     <AuthLayout>
