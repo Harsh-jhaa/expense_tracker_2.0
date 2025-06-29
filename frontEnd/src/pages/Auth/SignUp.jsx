@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Input from '../../components/Inputs/Input.jsx';
 import '../../index.css';
-import validEmail from '../../utils/helper.js';
+import { validEmail } from '../../utils/helper.js';
 import ProfilePicSelector from '../../components/Inputs/ProfilePicSelector.jsx';
 import axios from 'axios';
 import axiosInstance from '../../utils/axiosInstance.js';

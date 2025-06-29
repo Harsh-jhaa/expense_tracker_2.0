@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Input from '../../components/Inputs/Input.jsx';
 import '../../index.css';
-import validEmail from '../../utils/helper.js';
+import { validEmail } from '../../utils/helper.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths.js';
 import { UserContext } from '../../context/userContext.jsx';
@@ -15,7 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const {updateUser} = React.useContext(UserContext);
+  const { updateUser } = React.useContext(UserContext);
 
   const navigate = useNavigate();
 
