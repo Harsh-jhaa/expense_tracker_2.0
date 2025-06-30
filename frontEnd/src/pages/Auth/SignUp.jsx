@@ -9,7 +9,7 @@ import ProfilePicSelector from '../../components/Inputs/ProfilePicSelector.jsx';
 import axios from 'axios';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths.js';
-import { UserContext } from '../../context/userContext.jsx';
+import { UserContext } from '../../context/UserContext.jsx';
 import uploadImage from '../../utils/uploadImage.js';
 // import upload from '../../../../backEnd/middlewares/uploadMiddleware.js';
 

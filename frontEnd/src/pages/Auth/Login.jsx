@@ -7,7 +7,7 @@ import '../../index.css';
 import { validEmail } from '../../utils/helper.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths.js';
-import { UserContext } from '../../context/userContext.jsx';
+import { UserContext } from '../../context/UserContext.jsx';
 // import { set } from 'mongoose';
 
 const Login = () => {
