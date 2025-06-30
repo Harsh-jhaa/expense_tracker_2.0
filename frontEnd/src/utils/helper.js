@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const validEmail = (email) => {
   const regex = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
   return regex.test(email);
@@ -32,4 +31,17 @@ const addThousandsSeparator = (num) => {
     : formattedInteger;
 };
 
-export { validEmail, getInitials, addThousandsSeparator };
+const prepareExpenseBarChartData = (data = []) => {
+  const charData = data.map((item) => ({
+    category: item?.category,
+    amount: item?.amount,
+  }));
+  return charData;
+};
+
+export {
+  validEmail,
+  getInitials,
+  addThousandsSeparator,
+  prepareExpenseBarChartData,
+};
