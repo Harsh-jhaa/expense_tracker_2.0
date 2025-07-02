@@ -8,11 +8,12 @@ import Expense from './pages/Dashboard/Expense.jsx';
 import AuthLayout from './components/layouts/AuthLayout.jsx';
 import './index.css';
 import User from '../../backEnd/models/User.js';
-import { UserProvider } from './context/userContext.jsx';
+import { UserProvider } from './context/UserContext.jsx';
+import {Toaster} from 'react-hot-toast';
 const App = () => {
   return (
-    <UserProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <UserProvider>
         <Routes>
           <Route path='/' element={<Root />} />
           <Route path='/login' element={<Login />} />
@@ -21,8 +22,18 @@ const App = () => {
           <Route path='/income' element={<Income />} />
           <Route path='/expense' element={<Expense />} />
         </Routes>
-      </BrowserRouter>
-    </UserProvider>
+
+      <Toaster 
+        toastOptions={{
+          className: '',
+          style:{
+            fontSize: '13px'
+          },
+        }}
+      />
+
+      </UserProvider>
+    </BrowserRouter>
   );
 };
 

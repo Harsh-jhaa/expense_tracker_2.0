@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { UserContext } from '../context/UserContext.jsx';
+import moment from 'moment';
 const validEmail = (email) => {
   const regex = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
   return regex.test(email);
@@ -39,9 +40,37 @@ const prepareExpenseBarChartData = (data = []) => {
   return charData;
 };
 
+const prepareIncomeBarChartData = (data = []) => {
+  const sortedData = [...data].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+
+  const charData = sortedData.map((item) => ({
+    month: moment(item?.date).format('Do MMM'),
+    amount: item?.amount,
+    source: item?.source,
+  }));
+  return charData;
+};
+
+const prepareExpenseLineChartData = (data = []) => {
+  const sortedData = [...data].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+  const chartData = sortedData.map((item) => ({
+    month: moment(item?.date).format('Do MMM'),
+    amount: item?.amount,
+    category: item?.category,
+  }));
+
+  return chartData;
+};
+
 export {
   validEmail,
   getInitials,
   addThousandsSeparator,
   prepareExpenseBarChartData,
+  prepareIncomeBarChartData,
+  prepareExpenseLineChartData,
 };

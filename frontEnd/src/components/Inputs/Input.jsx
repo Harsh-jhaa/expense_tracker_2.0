@@ -9,7 +9,10 @@ const Input = ({ label, type, value, onChange, placeholder }) => {
   };
   return (
     <div>
-      <label className='text-[13px] text-slate-800 '> {label}</label>
+      <label className='text-[13px] text-slate-800 dark:text-gray-300 '>
+        {' '}
+        {label}
+      </label>
       <div className='input-box'>
         <input
           type={
