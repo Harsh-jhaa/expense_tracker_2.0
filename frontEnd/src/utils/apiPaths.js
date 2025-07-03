@@ -2,7 +2,7 @@
 // It is used to define the endpoints for various functionalities like authentication, income, expense, and dashboard.
 // The paths can be used in API requests to interact with the backend server.
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL ;
 const API_PATHS = {
   AUTH: {
     LOGIN: '/api/v1/auth/login',
